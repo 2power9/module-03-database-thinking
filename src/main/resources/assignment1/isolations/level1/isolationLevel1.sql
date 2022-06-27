@@ -1,0 +1,7 @@
+-- dirty read
+SET TRANSACTION ISOLATION LEVEL READ UNCOMMITTED;
+START TRANSACTION;
+
+    SELECT * FROM offices
+    WHERE offices.city = 'Boston';
+COMMIT;

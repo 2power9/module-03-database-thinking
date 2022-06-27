@@ -1,0 +1,46 @@
+Table "departments" {
+  "departmentCode" VARCHAR(10) [primary key, not null]
+  "fullName" VARCHAR(50) [not null]
+}
+
+Table "jobs" {
+  "jobTitleID" VARCHAR(10) [primary key, not null]
+  "jobTitle" VARCHAR(50) [not null]
+  "jobSalary" INT
+}
+
+Table "employees" {
+  "employeeID" VARCHAR(10) [primary key, not null]
+  "firstName" VARCHAR(50) [not null]
+  "lastName" VARCHAR(50) [not null]
+  "email" VARCHAR(50) [not null]
+  "departmentCode" VARCHAR(10) [not null]
+  "reportsTo" VARCHAR(10) [default: NULL]
+  "jobTitleID" VARCHAR(10) [not null]
+
+Indexes {
+  departmentCode [name: "departmentCode"]
+  reportsTo [name: "reportsTo"]
+  jobTitleID [name: "jobTitleID"]
+}
+}
+
+Table "furloughs" {
+  "furloughID" VARCHAR(20) [primary key, not null]
+  "employeeID" VARCHAR(10) [not null]
+  "description" TEXT [default: NULL]
+  "startDate" DATE [not null]
+  "endDate" DATE [not null]
+
+Indexes {
+  employeeID [name: "employeeID"]
+}
+}
+
+Ref "employees_fk_1":"employees"."employeeID" < "employees"."reportsTo"
+
+Ref "employees_fk_2":"departments"."departmentCode" < "employees"."departmentCode"
+
+Ref "employees_fk_3":"jobs"."jobTitleID" < "employees"."jobTitleID"
+
+Ref "furloughs_fk_1":"employees"."employeeID" < "furloughs"."employeeID"
