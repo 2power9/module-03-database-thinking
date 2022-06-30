@@ -1,5 +1,5 @@
 Project SalarySchema {
-    database_type: 'MySQL',
+    database_type: 'MySQL'
     Note: "Assignment2 - create database schema to count payroll for employees"
 }
 
