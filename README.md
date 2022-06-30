@@ -1,9 +1,18 @@
 # module-03-database-thinking
 
-## Assignment 3
+## Assignment 2
+
+|      ![](https://i.imgur.com/hoYP1yb.png)      | 
+|:----------------------------------------------:| 
+| Relational table diagram for `EmployeesSalary` |
+
 
 Document: <https://dbdocs.io/andrena2209/employeesSalary>
 
 ## Assignment 5
 
-Document:
+|     ![](https://i.imgur.com/fD7ogll.png)       |
+|:----------------------------------------------:| 
+| Relational table diagram for `EmployeesSalary` |
+
+Document: <https://dbdocs.io/andrena2209/PinterestClone>
