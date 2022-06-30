@@ -1,0 +1,62 @@
+Table "departments" {
+  "departmentCode" VARCHAR(10) [not null, primary key]
+  "fullName" VARCHAR(50) [not null]
+}
+
+Table "jobs" {
+  "jobTitleID" VARCHAR(10) [not null, primary key]
+  "jobTitle" VARCHAR(50) [not null]
+  "jobSalary" INT
+}
+
+Table "employees" {
+  "employeeID" VARCHAR(10) [not null, primary key]
+  "firstName" VARCHAR(50) [not null]
+  "lastName" VARCHAR(50) [not null]
+  "email" VARCHAR(50) [not null]
+  "departmentCode" VARCHAR(10) [not null]
+  "reportsTo" VARCHAR(10) [default: NULL, note: "employee work was reported to leader/mentor with ID in this field"]
+  "jobTitleID" VARCHAR(10) [not null]
+
+Indexes {
+  departmentCode [name: "departmentCode"]
+  reportsTo [name: "reportsTo"]
+  jobTitleID [name: "jobTitleID"]
+}
+}
+
+Table "furloughs" {
+  "furloughID" VARCHAR(20) [not null, primary key]
+  "employeeID" VARCHAR(10) [not null]
+  "description" TEXT [default: NULL]
+  "startDate" DATE [not null]
+  "endDate" DATE [not null]
+
+Indexes {
+  employeeID [name: "employeeID"]
+}
+}
+
+Table "payrollTransactions" {
+  "transactionID" VARCHAR(10) [not null, primary key]
+  "employeeID" VARCHAR(10) [not null]
+  "amount" INT [not null]
+  "month" INT [not null, note: "the month employee receives payroll"]
+  "year" INT [not null, note: "the year employee receives payroll"]
+  "logDate" DATE [not null, note: "the date admin sent money to employee's account"]
+
+Indexes {
+  employeeID [name: "employeeID"]
+  (month, year) [name: "timestamp_index"]
+}
+}
+
+Ref "employees_reportsTo_fk":"employees"."employeeID" < "employees"."reportsTo"
+
+Ref "employees_departmentCode_fk":"departments"."departmentCode" < "employees"."departmentCode"
+
+Ref "employees_jobTitle_fk":"jobs"."jobTitleID" < "employees"."jobTitleID"
+
+Ref "furloughs_fk_1":"employees"."employeeID" < "furloughs"."employeeID"
+
+Ref "trans_employeeID":"employees"."employeeID" < "payrollTransactions"."employeeID"

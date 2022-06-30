@@ -1,0 +1,122 @@
+Table "users" {
+  "userID" VARCHAR(10) [not null, primary key]
+  "userName" VARCHAR(20) [not null]
+  "password" VARCHAR(50) [not null]
+  "email" VARCHAR(50) [not null]
+  "numberFollowers" INT [default: 0]
+  "numberFollowings" INT [default: 0]
+}
+
+Table "pins" {
+  "pinID" VARCHAR(10) [not null, primary key]
+  "owner" VARCHAR(10) [not null]
+  "title" VARCHAR(50) [not null]
+  "description" TEXT [default: NULL]
+  "numberReacts" INT [default: 0]
+  "numberComments" INT [default: 0]
+
+Indexes {
+  owner [name: "owner"]
+}
+}
+
+Table "pictures" {
+  "pictureID" VARCHAR(10) [not null, primary key]
+  "pinID" VARCHAR(10) [not null]
+  "url" VARCHAR(50) [not null, note: "this url store video/picture link"]
+
+Indexes {
+  pinID [name: "pinID"]
+}
+}
+
+Table "boards" {
+  "boardID" VARCHAR(10) [not null, primary key]
+  "owner" VARCHAR(10) [not null]
+  "title" VARCHAR(50) [not null]
+  "visibility" VARCHAR(7) [not null, note: "this field is have two mode: `public` or `private`"]
+
+Indexes {
+  owner [name: "owner"]
+}
+}
+
+Table "belongsToBoard" {
+  "pinID" VARCHAR(10) [not null, primary key]
+  "boardID" VARCHAR(10) [not null, primary key]
+
+Indexes {
+  pinID [name: "pinID"]
+  boardID [name: "boardID"]
+}
+}
+
+Table "followers" {
+  "followeeID" VARCHAR(10) [not null, primary key]
+  "followerID" VARCHAR(10) [not null, primary key]
+
+Indexes {
+  followeeID [name: "followeeID"]
+  followerID [name: "followerID"]
+}
+}
+
+Table "collaborators" {
+  "boardID" VARCHAR(10) [not null, primary key]
+  "userID" VARCHAR(10) [not null, primary key]
+
+Indexes {
+  boardID [name: "boardID"]
+  userID [name: "userID"]
+}
+}
+
+Table "reacts" {
+  "pinID" VARCHAR(10) [not null, primary key]
+  "userID" VARCHAR(10) [not null, primary key]
+
+Indexes {
+  pinID [name: "pinID"]
+  userID [name: "userID"]
+}
+}
+
+Table "comments" {
+  "commentID" VARCHAR(10) [not null, primary key]
+  "pinID" VARCHAR(10) [not null]
+  "userID" VARCHAR(10) [not null]
+  "timeStamp" TIMESTAMP [default: `NOW()`]
+  "description" TEXT [not null]
+
+Indexes {
+  pinID [name: "pinID"]
+  userID [name: "userID"]
+  (pinID, userID) [name: "pinID_and_userID_index"]
+}
+}
+
+Ref "pin_owner_fk":"users"."userID" < "pins"."owner"
+
+Ref "pictures_pinID_fk":"pins"."pinID" < "pictures"."pinID"
+
+Ref "board_owner_fk":"users"."userID" < "boards"."owner"
+
+Ref "bltb_pinID_fk":"pins"."pinID" < "belongsToBoard"."pinID"
+
+Ref "bltb_boardID_fk":"boards"."boardID" < "belongsToBoard"."boardID"
+
+Ref "followeeID_fk":"users"."userID" < "followers"."followeeID"
+
+Ref "followerID_fk":"users"."userID" < "followers"."followerID"
+
+Ref "collab_boardID_fk":"boards"."boardID" < "collaborators"."boardID"
+
+Ref "collab_userID_fk":"users"."userID" < "collaborators"."userID"
+
+Ref "react_pinID_fk":"pins"."pinID" < "reacts"."pinID"
+
+Ref "react_userID_fk":"users"."userID" < "reacts"."userID"
+
+Ref "cmt_pinID_fk":"pins"."pinID" < "comments"."pinID"
+
+Ref "cmt_userID_fk":"users"."userID" < "comments"."userID"
