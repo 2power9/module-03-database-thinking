@@ -2,7 +2,7 @@ package querySample;
 
 import java.sql.*;
 
-public class Main {
+public class JDBCConnection {
     public static void main(String[] args) throws ClassNotFoundException {
         System.out.println("Hello world!");
         String url = "jdbc:mysql://localhost:3306/classicmodels";

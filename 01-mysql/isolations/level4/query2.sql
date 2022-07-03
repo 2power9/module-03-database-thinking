@@ -5,7 +5,6 @@ delimiter //
 CREATE PROCEDURE queryOfficeWithOfficeCode(IN targetOfficeCode VARCHAR(10))
 BEGIN
     -- 1. start a new transaction
-    SET TRANSACTION ISOLATION LEVEL SERIALIZABLE;
     START TRANSACTION;
 
     -- 2. update new office for employees in the old office (DEFAULT = 1)
