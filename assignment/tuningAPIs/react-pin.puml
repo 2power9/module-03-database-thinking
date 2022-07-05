@@ -1,0 +1,32 @@
+@startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+activate service
+  API -> service: call react API including userID and pinID
+
+activate DB
+  service -> DB: check if user react pin before
+  alt user react pin already
+    DB --> service: return true
+    service -> DB: delete row including userID and pinID
+    DB --> service: delete success
+    service --> API: unreact pin
+  else user does not react pin
+    DB --> service: return false
+    service -> DB: insert row including userID and pinID
+    DB --> service: insert success
+    service --> API: react pin
+    deactivate DB
+  end
+
+
+deactivate service
+deactivate API
+@enduml

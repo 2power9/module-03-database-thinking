@@ -1,0 +1,31 @@
+@startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+activate service
+  API -> service: call save pin API including pinID and boardID
+
+activate DB
+  service -> DB: check if pinID was added to boardID before
+  alt pinID was not added to boardID before
+    DB --> service: return true
+    service -> DB: insert new row including pinID and boardID
+    DB --> service: insert success
+    service --> API: return message add pin to board success
+  else pinID is in boardID
+    DB --> service: return false
+    deactivate DB
+    service --> API: return message this pin is in board already
+
+  end
+
+
+deactivate service
+deactivate API
+@enduml

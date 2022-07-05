@@ -1,0 +1,31 @@
+@startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+activate service
+  API -> service: call add follower API including followeeID and followerID
+
+activate DB
+  service -> DB: check if followee has been followed follower before
+  alt followee has not been followed by follower before
+    DB --> service: return true
+    service -> DB: insert new row including followeeID and followerID
+    DB --> service: insert success
+    service --> API: return message add follower success
+  else followee has been followed by follower before
+    DB --> service: return false
+    deactivate DB
+    service --> API: return message followee has been followed by follower already
+
+  end
+
+
+deactivate service
+deactivate API
+@enduml

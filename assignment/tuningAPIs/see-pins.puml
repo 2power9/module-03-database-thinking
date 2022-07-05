@@ -1,0 +1,27 @@
+@startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+activate service
+  API -> service: call see pins API
+
+activate DB
+  alt from user wall
+    service -> DB: query pins of user with @userID
+  else from a board of user
+    service -> DB: query pins of user with @userID and @boardID
+  else from search engine
+    service -> DB: query pins base on name of pin
+  end
+  DB --> service: finish query
+deactivate DB
+  service --> API: return query result
+deactivate service
+deactivate API
+@enduml

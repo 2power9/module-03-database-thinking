@@ -36,34 +36,38 @@ Document: <https://dbdocs.io/andrena2209/PinterestClone>
 
 ### Some APIs 
 
-| ![](https://i.imgur.com/DeadrKh.png)  |
-|:-------------------------------------:|
-|             add follower              |
+| ![](media/add-follower-0.png) |
+|:------------:|
+| add follower |
 
-|![](https://i.imgur.com/8IpWNl6.png)|
-|:----------------------------------:|
-|           create account           |
+|   ![](media/create-account-0.png)   |
+|:---------------------------------:|
+| create a new account              |
 
-| ![](https://i.imgur.com/UzMJ0YG.png) |
-|:------------------------------------:|
-|             create board             |
+| ![](media/create-board-0.png) |
+|:------------:|
+| create board |
 
-| ![](https://i.imgur.com/nGARhsq.png) |
-|:------------------------------------:|
-|            create comment            |
 
-| ![](https://i.imgur.com/F0I64Nv.png) |
-|:------------------------------------:|
-|              create pin              |
+| ![](media/create-comment-0.png) |
+|:-------------------------------:|
+|         create comment          |
 
-| ![](https://i.imgur.com/H11PQ9C.png) |
-|:------------------------------------:|
-|                react                 |
 
-| ![](https://i.imgur.com/VX6yrYT.png) |
-|:------------------------------------:|
-|               save pin               |
+| ![](media/create-pin-0.png) |
+|:---------------------------:|
+|         create pin          |
 
-| ![](https://i.imgur.com/o9d1Fn2.png) |
-|:------------------------------------:|
-|               see pins               |
+
+| ![](media/react-pin-0.png) |
+|:--------------------------:|
+|         react pin          |
+
+
+| ![](media/save-pin-0.png) |
+|:------------:|
+|   save pin   |
+
+| ![](media/see-pins-0.png)  |
+|:--------------------------:|
+|          see pins          |

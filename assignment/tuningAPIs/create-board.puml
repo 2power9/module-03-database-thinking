@@ -1,0 +1,31 @@
+@startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+  API -> service: [call API create board {title, desciption}]
+
+  activate service
+    service -> service: [validate title, boardName]
+  deactivate service
+
+
+    service -> DB: [insert new board]
+    activate service
+
+    activate DB
+
+    DB --> service: [finish]
+    deactivate DB
+    service --> API: [return a new board]
+  deactivate service
+
+
+
+deactivate API
+@enduml

@@ -1,0 +1,34 @@
+startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+
+  activate service
+  API -> service: [dispatch {userName, email, password}]
+  service -> service: [validate userName, email, password format]
+  deactivate service
+
+
+    service -> DB: [check if email exists]
+  activate service
+  activate DB
+    alt email already exists
+    DB --> service: [return true]
+    service --> API: [message to user this email already exists]
+    else email never existed before
+    DB --> service: [return false]
+    service -> DB: [insert new account]
+    DB --> service: [updated success]
+
+  deactivate DB
+  service --> API: [return a new account]
+  deactivate service
+  end
+deactivate API
+@enduml

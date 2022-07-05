@@ -1,0 +1,25 @@
+@startuml
+
+!include https://raw.githubusercontent.com/bschwarz/puml-themes/master/themes/materia-outline/puml-theme-materia-outline.puml
+
+participant "API" as API
+participant "service" as service
+database "database" as DB
+
+autonumber
+activate API
+activate service
+  API -> service: call comment API including userID, pinID and description
+  service -> service: validate description
+  alt description is invalid
+  service --> API: return message description invalid
+  else description is valid
+  service -> DB: isert new comment
+  DB --> service: insert success
+deactivate DB
+  service --> API: return new comment
+  end
+
+deactivate service
+deactivate API
+@enduml

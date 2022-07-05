@@ -1,18 +1,17 @@
 # module-03-database-thinking
 
-## Assignment 2
+> La vie en panic très fort ;-;
 
-|      ![](https://i.imgur.com/hoYP1yb.png)      | 
-|:----------------------------------------------:| 
-| Relational table diagram for `EmployeesSalary` |
+## Acknowledgement
 
+Big thanks to monsieur [@longhb](longhb@vng.com.vn) for giving many supports during this module.
 
-Document: <https://dbdocs.io/andrena2209/employeesSalary>
+Also, thanks to my buddy [@huyvha](huyvha@vng.com.vn) (my mentor now) and [@namlh4](namlh4@vng.com.vn) for help me survive through database.
 
-## Assignment 5
+## Solutions
 
-|      ![](https://i.imgur.com/fD7ogll.png)      |
-|:----------------------------------------------:| 
-| Relational table diagram for `PinterestClone`  |
+- `01-mysql`
+- `02-database-design`
+- `03-query-optimization`
+- `assignment`
 
-Document: <https://dbdocs.io/andrena2209/PinterestClone>
